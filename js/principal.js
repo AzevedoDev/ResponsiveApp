@@ -1,0 +1,1 @@
+var elemento = document.querySelector("#troca-display");

@@ -13,10 +13,21 @@ body{
     margin: 16px;
     padding: 16px;
 }
-@media (min-width: 850px){
+@media (min-width: 560px){
     .cartao{
         display: inline-block;
-        width: 490px;
+        width: auto;
+        flex-grow: 1;
+        flex-basis: auto;
+        box-sizing: border-box;
+        text-align: left;
+        
+    }
+    .mural{
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        flex-direction: column;
     }
 }
 .container{
