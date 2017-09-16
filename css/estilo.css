@@ -13,22 +13,36 @@ body{
     margin: 16px;
     padding: 16px;
 }
+#mudaLayout{
+    display: none;
+}
 @media (min-width: 560px){
     .cartao{
         display: inline-block;
-        width: auto;
+        width: 190px;
         flex-grow: 1;
-        flex-basis: auto;
+        flex-basis: 190px;
         box-sizing: border-box;
         text-align: left;
         
+    }
+    .mural--linhas .cartao{
+        display: block;
+        width: auto;
+        flex-basis: auto;
     }
     .mural{
         display: flex;
         flex-wrap: wrap;
         text-align: center;
+        
+    }
+    .mural--linhas{
         flex-direction: column;
     }
+    #mudaLayout{
+        display: inline-block;
+    }    
 }
 .container{
     padding: 0 10%;
