@@ -3,7 +3,6 @@
     padding: 0;
 }
 .cabecalho{
-    padding: 16px;
     background: #3b89da;
 }
 body{
@@ -13,4 +12,13 @@ body{
     background: #ebef40;
     margin: 16px;
     padding: 16px;
+}
+@media (min-width: 850px){
+    .cartao{
+        display: inline-block;
+        width: 490px;
+    }
+}
+.container{
+    padding: 0 10%;
 }
