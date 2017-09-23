@@ -1,6 +1,6 @@
 .opcoesDoCartao {
 	font-size: 1rem;
-	/* position: absolute; */
+	position: absolute;
 	top: 0;
 	left: 0;
 	transform: translate(-1em, -50%);

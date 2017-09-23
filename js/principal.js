@@ -16,16 +16,43 @@ function removeCartao(){
     },400);
 }
 var botoes = document.querySelectorAll(".opcoesDoCartao-remove");
-for (var i=0;1<botoes.length;i++){
+for (var i=0;i<botoes.length;i++){
     botoes[i].addEventListener("click", removeCartao);
 };
 
-// var botao =document.querySelectorAll(".remove");for(var i=0;i<botoes.length;i++){
-//     botoes[i].addEventListener("click",removeCartao);
-// }
-// var removeCartao(){
-//     var botao = this;
-//     var seletorDiv = botao.dataset-cartao;
-//     var div = document.querySelector("#" + seletorDiv);
-//     div.remove();
-// }
+// $(".opcoesDoCartao-remove").text("Remover").click(function(event){
+//     for (var i=0;i<botoes.length;i++){
+//         botoes[i].addEventListener("click", removeCartao);
+
+
+// });
+
+
+var contador = $(".cartao").length;
+
+
+$(".novoCartao").submit(function(event){
+    
+    
+    event.preventDefault();
+
+    var campoConteudo = $(".novoCartao-conteudo");
+    var conteudo = campoConteudo.val().trim();
+
+
+    if(conteudo){
+        
+        contador++;
+
+        var botaoRemove = $("<button>").addClass("opcoesDoCartao-remove").addClass("opcoesDoCartao-opcao").attr("data-ref" , contador).text("remover").click(removeCartao);
+
+        var opcoes = $("<div>").addClass("opcoesCartao").append(botaoRemove);
+
+        var conteudoTag = $("<p>").addClass("cartao-conteudo").append(conteudo);  
+        
+        $("<div>").attr("id","cartao_" + contador).addClass("cartao").append(opcoes).append(conteudoTag).prependTo(".mural");
+         
+    }
+
+    campoConteudo.val("");
+});
