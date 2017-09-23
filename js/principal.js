@@ -20,13 +20,6 @@ for (var i=0;i<botoes.length;i++){
     botoes[i].addEventListener("click", removeCartao);
 };
 
-// $(".opcoesDoCartao-remove").text("Remover").click(function(event){
-//     for (var i=0;i<botoes.length;i++){
-//         botoes[i].addEventListener("click", removeCartao);
-
-
-// });
-
 
 var contador = $(".cartao").length;
 
@@ -37,22 +30,56 @@ $(".novoCartao").submit(function(event){
     event.preventDefault();
 
     var campoConteudo = $(".novoCartao-conteudo");
-    var conteudo = campoConteudo.val().trim();
+    var conteudo = campoConteudo.val().trim().replace(/\n/g, "<br>");
 
 
     if(conteudo){
         
         contador++;
 
-        var botaoRemove = $("<button>").addClass("opcoesDoCartao-remove").addClass("opcoesDoCartao-opcao").attr("data-ref" , contador).text("remover").click(removeCartao);
+    
 
-        var opcoes = $("<div>").addClass("opcoesCartao").append(botaoRemove);
+        var botaoRemove = $("<button>").addClass("opcoesDoCartao-remove")
+                                       .addClass("opcoesDoCartao-opcao").attr("data-ref" , contador).text("remover").click(removeCartao);
+
+        var opcoes = $("<div>").addClass("opcoesDoCartao").append(botaoRemove);
 
         var conteudoTag = $("<p>").addClass("cartao-conteudo").append(conteudo);  
         
-        $("<div>").attr("id","cartao_" + contador).addClass("cartao").append(opcoes).append(conteudoTag).prependTo(".mural");
-         
+       var tipoCartao = decideTipoCartao(conteudo);
+       
+        $("<div>").attr("id","cartao_" + contador)
+                    .addClass("cartao")
+                    .addClass(tipoCartao)
+                    .append(opcoes)
+                    .append(conteudoTag)
+                    .prependTo(".mural");
+                    
     }
 
     campoConteudo.val("");
 });
+
+function decideTipoCartao(conteudo){
+    var quebras = conteudo.split("<br>").length;
+
+    var totalDeLetras = conteudo.replace(/<br>/g, " ").length;
+
+    var ultimoMaior = "";
+    conteudo.replace(/<br>/g, " ").split(" ").forEach(function(palavra) {
+        if(palavra.length > ultimoMaior.length){
+            ultimoMaior = palavra;
+        }
+    });
+    var tamMaior = ultimoMaior.length;
+
+    var tipoCartao = "cartao--textoPequeno";
+
+    if(tamMaior < 9 && quebras < 5 && totalDeLetras < 55){
+        tipoCartao = "cartao--textoGrande";
+    }else if(tamMaior < 12 && quebras < 6 && totalDeLetras < 75){
+        tipoCartao = "cartao--textoMedio";
+    }
+    
+    return tipoCartao;
+}
