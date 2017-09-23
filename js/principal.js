@@ -99,3 +99,6 @@ $("#busca").on("input", function(){
             $(".cartao").show();
         }
     });
+
+
+    https://tableless.com.br/o-basico-sobre-expressoes-regulares/
