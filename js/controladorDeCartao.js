@@ -1,14 +1,7 @@
 const controladorDeCartao = (function(){
-    "use strict";
 
-    function removeCartao(){
-        var cartao = document.querySelector("#cartao_" + this.dataset.ref);
-        cartao.classList.add("cartao--some");
-        setTimeout(function(){
-            cartao.remove();
-            $(document).trigger("precisaSincronizar");
-        },400);
-    };
+    var contador = 0;
+    
 
     function decideTipoCartao(conteudo){
         var quebras = conteudo.split("<br>").length;
@@ -34,38 +27,43 @@ const controladorDeCartao = (function(){
         return tipoCartao;
     }
 
-    var contador = 0;
 
     function adicionaCartao(conteudo,cor){
         
         contador++;
-        
-    
-            var botaoRemove = $("<button>").addClass("opcoesDoCartao-remove")
-                                            .addClass("opcoesDoCartao-opcao")
-                                            .attr("data-ref" , contador)
-                                            .text("remover")
-                                            .click(removeCartao);
-    
-    
-            var opcoes = $("<div>").addClass("opcoesDoCartao")
-                        .append(botaoRemove);
+
+            var opcoes = criaOpcaoDoCartao(contador);
     
             var conteudoTag = $("<p>").addClass("cartao-conteudo")
-                        .append(conteudo);
+                                        .attr("contenteditable", true)
+                                        .on("input",editaCartaoHandler)
+                                        .append(conteudo);
     
             
             var tipoCartao = decideTipoCartao(conteudo);
     
             
             $("<div>").attr("id","cartao_" + contador)
+                        .attr("tabindex", 0)
                         .addClass("cartao")
                         .addClass(tipoCartao)
                         .append(opcoes)
                         .append(conteudoTag)
                         .css("background-color",cor)
                         .prependTo(".mural");
+    
+        return contador;
     };
+
+    var intervaloSyncEdicao;
+    
+    function editaCartaoHandler(event){
+        clearTimeout(intervaloSyncEdicao);
+
+        intervaloSyncEdicao = setTimeout(function(){
+            $(document).trigger("precisaSincronizar");
+        },1000);
+    }
 
     return{
         adicionaCartao: adicionaCartao

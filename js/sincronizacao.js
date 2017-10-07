@@ -1,6 +1,6 @@
 (function() {
 
-    $(document).on("precisaSincronizar",function(){
+    $(document).on  ("precisaSincronizar",function(){
         
             var cartoes = [];
         
@@ -10,6 +10,7 @@
             $(".cartao").each(function(){
                 var cartao={};
                 cartao.conteudo = $(this).find(".cartao-conteudo").html();
+                cartao.cor = $(this).css("background-color");
                 cartoes.push(cartao);
             });
         
@@ -51,7 +52,7 @@
             var cartoes = res.cartoes;
             console.log(cartoes.length + " carregados em " + res.usuario);
             cartoes.forEach(function(cartao){
-                controladorDeCartao.adicionaCartao(cartao.conteudo);
+                controladorDeCartao.adicionaCartao(cartao.conteudo,cartao.cor);
             });
         }
     );
