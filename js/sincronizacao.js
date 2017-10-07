@@ -1,6 +1,6 @@
 (function() {
 
-    $("#sync").click(function(){
+    $(document).on("precisaSincronizar",function(){
         
             var cartoes = [];
         
@@ -55,7 +55,13 @@
             });
         }
     );
-        
+       
+    
+    $("#sync").click(function(){
+        $(document).trigger("precisaSincronizar");
+    });
+
+
 })()
 
 

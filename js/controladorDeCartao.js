@@ -6,6 +6,7 @@ const controladorDeCartao = (function(){
         cartao.classList.add("cartao--some");
         setTimeout(function(){
             cartao.remove();
+            $(document).trigger("precisaSincronizar");
         },400);
     };
 

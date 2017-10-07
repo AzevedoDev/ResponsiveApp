@@ -1,4 +1,5 @@
 (function() {
+     
     var botoes = document.querySelectorAll(".opcoesDoCartao-remove");
     
     for (var i=0;i<botoes.length;i++){
@@ -23,9 +24,8 @@
     
     
         if(conteudo){
-            
             controladorDeCartao.adicionaCartao(conteudo, "#EBEF40");
-                        
+            $(document).trigger("precisaSincronizar");    
         };
     
         campoConteudo.val("");
